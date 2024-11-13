@@ -7,6 +7,7 @@ Nom is null,
  if (EUNIS_2 is null,'','x' || EUNIS_2 || 
  if (EUNIS_3 is null,'','x' || EUNIS_3))||
  
+ '-'||
  attribute(get_feature('EUNIS','LB_CODE' , "EUNIS_1" ),'LB_HAB_FR')||
  
  if (EUNIS_2 is null,'',' x ' ||  attribute(
