@@ -13,7 +13,7 @@ Nom is null,
  if (EUNIS_2 is null,'',' x ' ||  attribute(
 get_feature('EUNIS','LB_CODE' , "EUNIS_2" ),'LB_HAB_FR') || 
  if (EUNIS_3 is null,'',' x ' ||  attribute(
-get_feature('EUNIS','LB_CODE' , "EUNIS_1" ),
+get_feature('EUNIS','LB_CODE' , "EUNIS_3" ),
 'LB_HAB_FR')))
 
  ,
