@@ -14,7 +14,7 @@ if(!require("tidyverse")){install.packages("tidyverse")} ; library("tidyverse")
 
 
 dossier_photos <- "DCIM"
-photos <- list.files(getwd(), pattern = "\\.jpe?g$", full.names = TRUE)
+photos <- list.files(getwd(), pattern = "\\.jpe?g$", full.names = F)
 
 
 metadata <- read_exif(photos)
@@ -52,12 +52,13 @@ photo = data_wgs84
 
 #suppression des NA :
 photo = photo[!is.na(photo$nom_fichier),]
+photo$Photo = sub("DCIM/", "", photo$Photo) 
 
 exiftool_path <- "D:/Logiciel/ExifTool/exiftool.exe"
 # Boucle pour modifier les métadonnées GPS de chaque photo
 for (i in seq_along(photos)) {
   # Nom du fichier photo sans le chemin complet
-  nom_fichier <- basename(photos[i])
+   nom_fichier <- basename(photos[i])
   
   # Filtrer pour obtenir les nouvelles coordonnées de ce fichier
   nouvelle_coord <- photo[photo$Photo == nom_fichier,]
@@ -67,10 +68,10 @@ for (i in seq_along(photos)) {
     longitude <- nouvelle_coord$GPSLongitude
   }
   # Sauvegarder les nouvelles coordonnées GPS dans les photos
-  system2(exiftool_path, args = c(paste0("-GPSLatitude=",latitude), paste0("-GPSLongitude=",longitude), photos[i]))
+  system2(exiftool_path, args = c(paste0("-GPSLatitude=",latitude), paste0("-GPSLongitude=",longitude), shQuote(photos[i])))
 }
 
 # Vérificaiton
 metadata_modifiees <- read_exif(photos)
 metadata_modifiees$GPSLatitude
-
+metadata_modifiees$GPSLongitude
