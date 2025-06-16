@@ -1,7 +1,21 @@
 {
     "author": "Augustin Soulard",
-    "exported_at": "2025-05-21T17:26:46",
+    "exported_at": "2025-06-16T15:44:35",
     "expressions": [
+        {
+            "description": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>",
+            "expression": "overlay_intersects(\r\n  layer:='Habitats Surfaciques',\r\n  expression:=\"T_hablegend\" || '_' || \"fid\",\r\n  limit:=1\r\n)[0]",
+            "group": "user",
+            "name": "Flore intersect habitats",
+            "type": "expression"
+        },
+        {
+            "description": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>",
+            "expression": "if( \"Releve\" IS NULL,\r\n'HR_'||overlay_intersects(\r\n  layer:='Habitats Surfaciques',\r\n  expression:=\"T_hablegend\" || '_' || \"fid\",\r\n  limit:=1\r\n)[0],\r\n\"Releve\")",
+            "group": "user",
+            "name": "Relevés par polygones habitats",
+            "type": "expression"
+        },
         {
             "description": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>",
             "expression": "if(\"Nom\" is null,\r\nright(EUNIS_1, length(EUNIS_1)-strpos(EUNIS_1,'-')-1)\r\n|| \r\nif (EUNIS_2 is null,'',' x ' || right(EUNIS_2, length(EUNIS_2)-strpos(EUNIS_2,'-')-1)) \r\n|| \r\n if (EUNIS_3 is null,'',' x ' || right(EUNIS_3, length(EUNIS_3)-strpos(EUNIS_3,'-')-1))\r\n,\"Nom\")\r\n\r\n||\r\n\r\n\r\n' ('||\r\nleft(EUNIS_1,  strpos(EUNIS_1,'-')-2 )  \r\n|| \r\nif (EUNIS_2 is null,'',' x ' || left(EUNIS_2,  strpos(EUNIS_2,'-')-2 ))\r\n|| \r\nif (EUNIS_3 is null,'',' x ' || left(EUNIS_3,  strpos(EUNIS_3,'-')-2 ))||')'\r\n\r\n",
